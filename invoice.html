@@ -1,0 +1,65 @@
+<div class="page-container">Page of</div>
+<div class="logo-container"><h1 style="height: 18px; color: rgb(108, 61, 183);">360-CRM</h1></div>
+<table class="invoice-info-container">
+<tbody>
+<tr>
+<td class="client-name" rowspan="2">{{client_name}}</td>
+<td>360-CRM</td>
+</tr>
+<tr>
+<td>   </td>
+</tr>
+<tr>
+<td>Invoice Date: <strong>{{today_date}}</strong></td>
+<td>360crm0@gmail.com</td>
+</tr>
+<tr>
+<td>Invoice No: <strong>12345</strong></td>
+<td>  </td>
+</tr>
+</tbody>
+</table>
+<table class="line-items-container">
+<thead>
+<tr>
+<th class="heading-quantity">&nbsp;</th>
+<th class="heading-description">Description</th>
+<th class="heading-price">&nbsp;</th>
+<th class="heading-subtotal">Subtotal</th>
+</tr>
+</thead>
+<tbody>
+{% for item in items %}
+    <tr>
+    <td>&nbsp;</td>
+    <td>{{item.name}}</td>
+    <td class="right">&nbsp;</td>
+    <td class="bold">{{item.subtotal}}</td>
+    </tr>
+{% endfor %}
+
+</tbody>
+</table>
+<table class="line-items-container has-bottom-border">
+<thead>
+<tr>
+<th>Payment Info</th>
+<th>Due By</th>
+<th>Total Due</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="payment-info">
+<div>Account No: <strong>-</strong></div>
+<div>Routing No: <strong>-</strong></div>
+</td>
+<td class="large">{{month}}</td>
+<td class="large total">{{total}}</td>
+</tr>
+</tbody>
+</table>
+<div class="footer">
+<div class="footer-info">360-CRM | 260crm0@gmail.com</div>
+<div class="footer-thanks"><img src="https://github.com/anvilco/html-pdf-invoice-template/raw/main/img/heart.png" alt="heart" />Thank you!</div>
+</div>

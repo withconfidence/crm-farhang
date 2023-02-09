@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>icons8-settings-64.png</file>
+    <file>icons8-shopping-cart-64.png</file>
+    <file>icons8-new-product-64.png</file>
+    <file>icons8-new-product-50.png</file>
+    <file>icons8-customer-64.png</file>
+    <file>external-customer-shopping-and-ecommerce-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png</file>
+    <file>1053161.png</file>
+    <file>order.png</file>
+    <file>inventory.png</file>
+    <file>8702219.png</file>
+    <file>search.png</file>
+    <file>switch.png</file>
+    <file>7947586491595453760-512.png</file>
+    <file>icons8-male-user-50.png</file>
+    <file>icons8-add-50.png</file>
+    <file>icons8-sell-stock-50.png</file>
+    <file>icons8-online-support-50.png</file>
+    <file>icons8-home-page-50.png</file>
+  </qresource>
+</RCC>
