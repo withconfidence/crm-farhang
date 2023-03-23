@@ -148,15 +148,16 @@ def get_customer_data(name=None):
     myresult = c.fetchall()
     conn.commit()
     return myresult
+
 def log_in(email):
 
-        conn = sqlite3.connect('crm.db')
-        c = conn.cursor()
-        sql = ("SELECT * FROM user where email=?")
-        c.execute(sql,(email,))
-        myresult = c.fetchall()
-        conn.commit()
-        return myresult
+    conn = sqlite3.connect('crm.db')
+    c = conn.cursor()
+    sql = ("SELECT * FROM user where email=?")
+    c.execute(sql,(email,))
+    myresult = c.fetchall()
+    conn.commit()
+    return myresult
         
 
 # def log_inset():
@@ -167,3 +168,61 @@ def log_in(email):
 #     conn.commit()
 #     print("Login successfully.")
 # insert_user("admin","admin","admin")
+
+
+def delete_schedule(id):
+    sql = "DELETE from schedule_ where id=?"
+    val = (id,)
+    c.execute(sql, val)
+    conn.commit()
+    print("Deleted...")
+    return
+
+
+def insert_schedule(customer_name,title,date,time,duration):
+    conn = sqlite3.connect(r'crm.db')
+    c = conn.cursor()
+    sql=("INSERT INTO schedule_ (customer_id,title,date,time,duration) VALUES(?,?,?,?,?)")
+    val=(customer_name,title,date,time,duration)
+    c.execute(sql,val)
+    myresult = c.fetchone()
+    conn.commit()
+    print("Data Entered successfully.")
+    return myresult
+
+
+def update_schedule(id,data):
+    sql = "UPDATE schedule_ SET title=?,date=?,time=?,duration=? where id=?"
+    val = (data[0],data[1],data[2],data[3],id)
+    c.execute(sql, val)
+    conn.commit()
+    print("Update order")
+    return
+
+
+def get_schedule(product_name):
+    conn = sqlite3.connect(r'crm.db')
+    c = conn.cursor()
+    sql = ("SELECT quantity FROM inventory where product_name=?")
+    val=(product_name,)
+    c.execute(sql,val)
+    myresult = c.fetchall()
+    conn.commit()
+    return myresult
+
+
+def get_schedule_data(customer_name=None):
+        conn = sqlite3.connect(r'crm.db')
+        c = conn.cursor()
+        if customer_name!=None:
+            sql = "SELECT schedule_.id, customer.first_name, schedule_.title, schedule_.date, schedule_.time, schedule_.duration from SCHEDULE_ INNER JOIN customer on schedule_.customer_id = customer.id where customer.first_name=?"
+
+            val=(customer_name,)
+            c.execute(sql,val)
+        else:
+            sql = "SELECT schedule_.id, customer.first_name, schedule_.title, schedule_.date, schedule_.time, schedule_.duration from SCHEDULE_ INNER JOIN customer on schedule_.customer_id = customer.id"
+
+            c.execute(sql)
+        myresult = c.fetchall()
+        conn.commit()
+        return myresult

@@ -61,6 +61,8 @@ def generate(id):
     # send email function call
     sendEmaill = sendEmail.send_email_pdf_figs("invoice.pdf",data.data_model.client_name,email)
 def generate2(id):
+    print("order id = ", id)
+
     import sqlite3
     conc = sqlite3.connect(os.getcwd()+'/crm.db')
     connection = conc.cursor()

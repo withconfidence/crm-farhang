@@ -23,5 +23,11 @@ c.execute('''
           ([id] INTEGER PRIMARY KEY, [customer_id] INTEGER, [date] TEXT, [item_id] INTEGER, [quantity] TEXT, [price] INTEGER, [discount] TEXT,FOREIGN KEY (customer_id)
        REFERENCES customer (id),FOREIGN KEY (item_id) REFERENCES inventory (id))
           ''')
-                     
+
+c.execute('''
+          CREATE TABLE IF NOT EXISTS schedule_
+          ([id] INTEGER PRIMARY KEY, [customer_id] INTEGER, [title] TEXT, [date] TEXT, [time] TEXT, [duration] TEXT,
+           FOREIGN KEY (customer_id) REFERENCES customer (id))
+          ''')
+
 conn.commit()

@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 from  PyQt5.QtCore import *
 from  PyQt5.QtGui import *
 from  PyQt5.QtWidgets import *
@@ -17,6 +17,7 @@ import db
 from time import sleep
 from functools import partial
 import invoice
+import schedule
 import datetime
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -282,7 +283,42 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_27.setObjectName("pushButton_27")
         self.verticalLayout_2.addWidget(self.pushButton_27)
-        
+
+
+        self.pushButton_schedule = QtWidgets.QPushButton(self.frame_81)
+        self.pushButton_schedule.setMinimumSize(QtCore.QSize(0, 50))
+        self.pushButton_schedule.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Franklin Gothic Book")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_schedule.setFont(font)
+        self.pushButton_schedule.setStyleSheet("QPushButton {\n"
+"color: rgb(255, 255, 255);\n"
+"background:transparent;\n"
+"qproperty-icon:url(:/newPrefix/icons-sechdule.png);\n"
+"qproperty-iconSize: 30px;\n"
+"background-repeat:none;\n"
+"border-radius:1px;\n"
+"text-align: left; \n"
+"border-left: 15px solid rgb(108, 61, 183);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    \n"
+"    background-color: rgb(98, 55, 166);\n"
+"    border-left: 15px solid rgb(98, 55, 166);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    \n"
+"    background-color: rgb(78, 44, 132);\n"
+"    border-left: 15px solid  rgb(78, 44, 132);\n"
+"}")
+        self.pushButton_schedule.setObjectName("pushButton_schedule")
+        self.verticalLayout_2.addWidget(self.pushButton_schedule)
+
         self.horizontalLayout_2.addWidget(self.frame_81, 0, QtCore.Qt.AlignTop)
         self.horizontalLayout.addWidget(self.frame_2)
         self.stackedWidget = QtWidgets.QStackedWidget(self.frame)
@@ -1274,6 +1310,531 @@ class Ui_MainWindow(object):
         self.verticalLayout_25.addWidget(self.frame_78)
         self.verticalLayout_30.addWidget(self.frame_70)
         self.stackedWidget.addWidget(self.page)
+
+
+        self.schedule_page = QtWidgets.QWidget()
+        self.schedule_page.setObjectName("schedule_page")
+        self.schedule_verticalLayout_15 = QtWidgets.QVBoxLayout(self.schedule_page)
+        self.schedule_verticalLayout_15.setObjectName("schedule_verticalLayout_15")
+        self.schedule_frame_56 = QtWidgets.QFrame(self.schedule_page)
+        self.schedule_frame_56.setStyleSheet("background-color: rgb(238, 235, 241);")
+        self.schedule_frame_56.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_56.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_56.setObjectName("schedule_frame_56")
+        self.schedule_verticalLayout_2 = QtWidgets.QVBoxLayout(self.schedule_frame_56)
+        self.schedule_verticalLayout_2.setObjectName("schedule_verticalLayout_2")
+        self.schedule_frame_58 = QtWidgets.QFrame(self.schedule_frame_56)
+        self.schedule_frame_58.setMaximumSize(QtCore.QSize(16777215, 100))
+        self.schedule_frame_58.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_58.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_58.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_58.setObjectName("schedule_frame_58")
+        self.schedule_verticalLayout_9 = QtWidgets.QVBoxLayout(self.schedule_frame_58)
+        self.schedule_verticalLayout_9.setObjectName("schedule_verticalLayout_9")
+        self.schedule_frame_34 = QtWidgets.QFrame(self.schedule_frame_58)
+        self.schedule_frame_34.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_34.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_34.setObjectName("schedule_frame_34")
+        self.schedule_horizontalLayout_16 = QtWidgets.QHBoxLayout(self.schedule_frame_34)
+        self.schedule_horizontalLayout_16.setObjectName("schedule_horizontalLayout_16")
+        self.schedule_label_52 = QtWidgets.QLabel(self.schedule_frame_34)
+        self.schedule_label_52.setMinimumSize(QtCore.QSize(200, 0))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Black")
+        font.setPointSize(30)
+        font.setBold(False)
+        font.setItalic(True)
+        font.setUnderline(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.schedule_label_52.setFont(font)
+        self.schedule_label_52.setStyleSheet("color: rgb(108, 61, 183);")
+        self.schedule_label_52.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_52.setObjectName("schedule_label_52")
+        self.schedule_horizontalLayout_16.addWidget(self.schedule_label_52)
+        self.schedule_label_3 = QtWidgets.QLabel(self.schedule_frame_34)
+        self.schedule_label_3.setMinimumSize(QtCore.QSize(100, 70))
+        self.schedule_label_3.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.schedule_label_3.setText("")
+        self.schedule_label_3.setObjectName("schedule_label_3")
+        self.schedule_horizontalLayout_16.addWidget(self.schedule_label_3)
+        self.schedule_verticalLayout_9.addWidget(self.schedule_frame_34, 0, QtCore.Qt.AlignHCenter)
+        self.schedule_verticalLayout_2.addWidget(self.schedule_frame_58)
+        self.schedule_horizontalLayout_41 = QtWidgets.QHBoxLayout()
+        self.schedule_horizontalLayout_41.setObjectName("schedule_horizontalLayout_41")
+        self.schedule_frame_15 = QtWidgets.QFrame(self.schedule_frame_56)
+        self.schedule_frame_15.setStyleSheet("")
+        self.schedule_frame_15.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_15.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_15.setMinimumWidth(450)
+        self.schedule_frame_15.setMaximumWidth(550)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_frame_15.sizePolicy().hasHeightForWidth())
+        self.schedule_frame_15.setSizePolicy(sizePolicy)
+        self.schedule_frame_15.setObjectName("schedule_frame_15")
+        self.schedule_verticalLayout_13 = QtWidgets.QVBoxLayout(self.schedule_frame_15)
+        self.schedule_verticalLayout_13.setObjectName("schedule_verticalLayout_13")
+        self.schedule_frame_24 = QtWidgets.QFrame(self.schedule_frame_15)
+        self.schedule_frame_24.setMinimumSize(QtCore.QSize(0, 250))
+        self.schedule_frame_24.setMaximumSize(QtCore.QSize(16777215, 300))
+        self.schedule_frame_24.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_24.setObjectName("schedule_frame_24")
+        self.schedule_gridLayout_5 = QtWidgets.QGridLayout(self.schedule_frame_24)
+        self.schedule_gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.schedule_gridLayout_5.setObjectName("schedule_gridLayout_5")
+        self.schedule_calendarWidget_2 = QtWidgets.QCalendarWidget(self.schedule_frame_24)
+        self.schedule_calendarWidget_2.setMinimumSize(QtCore.QSize(0, 0))
+        self.schedule_calendarWidget_2.setAutoFillBackground(True)
+#         self.schedule_calendarWidget_2.setStyleSheet("background-color: rgb(196, 215, 238);\n"
+# "alternate-background-color: rgb(24, 255, 58);\n"
+# "font: 12pt \"MS Shell Dlg 2\";\n"
+# "color: rgb(0, 0, 0);\n"
+# "")
+        self.schedule_calendarWidget_2.setGridVisible(True)
+        self.schedule_calendarWidget_2.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.NoVerticalHeader)
+        self.schedule_calendarWidget_2.setNavigationBarVisible(True)
+        self.schedule_calendarWidget_2.setDateEditEnabled(True)
+        self.schedule_calendarWidget_2.setObjectName("schedule_calendarWidget_2")
+        # self.schedule_calendarWidget_2.setStyleSheet(
+        #     """
+        #     background-color: rgb(196, 215, 238);
+        #     selection-background-color: rgb(170, 85, 255);
+        #     alternate-background-color: rgb(24, 255, 58);
+        #     font: 12pt 'MS Shell Dlg 2';
+        #     """
+        # )
+        # self.schedule_calendarWidget_2.setStyleSheet("background-color: lightgreen;")
+
+        self.schedule_calendarWidget_2.setStyleSheet(
+                "background-color: lightgreen;"
+                "alternate-background-color:  rgb(24, 255, 58);"
+                "selection-background-color: rgb(170, 85, 255);"
+                "font: 12pt 'MS Shell Dlg 2';"
+                # "QCalendarWidget"
+                # "{"
+                # "background-color: lightgreen;"
+                # "selection-background-color: rgb(170, 85, 255);"
+                # "font: 12pt 'MS Shell Dlg 2';"
+                # "}"
+                # "QCalendarWidget QToolButton"
+                # "{"
+                # "font: 12pt 'MS Shell Dlg 2'; background-color: lightgreen; color : black;"
+                # "}"
+                # "QCalendarWidget QToolButton::hover"
+                # "{"
+                # "background-color: cyan;"
+                # "}"
+                # "QCalendarWidget QToolButton::pressed"
+                # "{"
+                # "background-color: white;"
+                # "}"
+                # """
+                # QCalendarWidget  QWidget{
+                # alternate-background-color:  rgb(24, 255, 58);
+                # }
+                # QCalendarWidget QAbstractItemView:enabled {
+                # font: 12pt 'MS Shell Dlg 2';
+                # background-color: lightgreen;
+                # selection-background-color: rgb(170, 85, 255);
+                # }
+                # """
+        )
+
+        
+        self.date_painter = QTextCharFormat()
+        self.date_painter.setFont(QFont("Times", 18, 200))
+        # self.date_painter.setBackground(QBrush(QColor("red")))
+        # self.date_brush = QBrush()
+        # self.date_brush.setColor(Qt.blue)
+
+        self.schedule_gridLayout_5.addWidget(self.schedule_calendarWidget_2, 0, 0, 1, 1)
+        self.schedule_verticalLayout_13.addWidget(self.schedule_frame_24)
+        self.schedule_frame_19 = QtWidgets.QFrame(self.schedule_frame_15)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_frame_19.sizePolicy().hasHeightForWidth())
+        self.schedule_frame_19.setSizePolicy(sizePolicy)
+        self.schedule_frame_19.setMaximumSize(QtCore.QSize(16777215, 90))
+        self.schedule_frame_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_19.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_19.setObjectName("schedule_frame_19")
+        self.schedule_horizontalLayout_22 = QtWidgets.QHBoxLayout(self.schedule_frame_19)
+        self.schedule_horizontalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_22.setSpacing(2)
+        self.schedule_horizontalLayout_22.setObjectName("schedule_horizontalLayout_22")
+        self.schedule_frame_21 = QtWidgets.QFrame(self.schedule_frame_19)
+        self.schedule_frame_21.setMinimumSize(QtCore.QSize(0, 50))
+        self.schedule_frame_21.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_21.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_21.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_21.setObjectName("schedule_frame_21")
+        self.schedule_horizontalLayout_24 = QtWidgets.QHBoxLayout(self.schedule_frame_21)
+        self.schedule_horizontalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_24.setSpacing(0)
+        self.schedule_horizontalLayout_24.setObjectName("schedule_horizontalLayout_24")
+        self.schedule_label_64 = QtWidgets.QLabel(self.schedule_frame_21)
+        self.schedule_label_64.setMinimumSize(QtCore.QSize(60, 0))
+        self.schedule_label_64.setMaximumSize(QtCore.QSize(109, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_label_64.setFont(font)
+        self.schedule_label_64.setStyleSheet("color: rgb(87, 71, 127);")
+        self.schedule_label_64.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_64.setObjectName("schedule_label_64")
+        self.schedule_horizontalLayout_24.addWidget(self.schedule_label_64)
+        self.schedule_dateEdit = QtWidgets.QDateEdit(self.schedule_frame_21)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_dateEdit.sizePolicy().hasHeightForWidth())
+        self.schedule_dateEdit.setSizePolicy(sizePolicy)
+        self.schedule_dateEdit.setMinimumSize(QtCore.QSize(100, 20))
+        self.schedule_dateEdit.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.schedule_dateEdit.setStyleSheet("color: rgb(87, 71, 127);\n"
+"font: 75 12pt \"MS Shell Dlg 2\";\n"
+"")
+        self.schedule_dateEdit.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_dateEdit.setDisplayFormat("yyyy-MM-dd")
+        self.schedule_dateEdit.setObjectName("schedule_dateEdit")
+        self.schedule_horizontalLayout_24.addWidget(self.schedule_dateEdit)
+        self.schedule_horizontalLayout_22.addWidget(self.schedule_frame_21)
+        self.schedule_frame_23 = QtWidgets.QFrame(self.schedule_frame_19)
+        self.schedule_frame_23.setMinimumSize(QtCore.QSize(0, 50))
+        self.schedule_frame_23.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_23.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_23.setObjectName("schedule_frame_23")
+        self.schedule_horizontalLayout_25 = QtWidgets.QHBoxLayout(self.schedule_frame_23)
+        self.schedule_horizontalLayout_25.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_25.setSpacing(0)
+        self.schedule_horizontalLayout_25.setObjectName("schedule_horizontalLayout_25")
+        self.schedule_label_65 = QtWidgets.QLabel(self.schedule_frame_23)
+        self.schedule_label_65.setMinimumSize(QtCore.QSize(60, 0))
+        self.schedule_label_65.setMaximumSize(QtCore.QSize(108, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_label_65.setFont(font)
+        self.schedule_label_65.setStyleSheet("color: rgb(87, 71, 127);")
+        self.schedule_label_65.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_65.setObjectName("schedule_label_65")
+        self.schedule_horizontalLayout_25.addWidget(self.schedule_label_65)
+        self.schedule_timeEdit = QtWidgets.QTimeEdit(self.schedule_frame_23)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_timeEdit.sizePolicy().hasHeightForWidth())
+        self.schedule_timeEdit.setSizePolicy(sizePolicy)
+        self.schedule_timeEdit.setMinimumSize(QtCore.QSize(100, 25))
+        self.schedule_timeEdit.setStyleSheet("color: rgb(87, 71, 127);\n"
+"font: 75 12pt \"MS Shell Dlg 2\";")
+        self.schedule_timeEdit.setWrapping(False)
+        self.schedule_timeEdit.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_timeEdit.setDisplayFormat("hh:mm")
+        self.schedule_timeEdit.setObjectName("schedule_timeEdit")
+        self.schedule_horizontalLayout_25.addWidget(self.schedule_timeEdit)
+        self.schedule_horizontalLayout_22.addWidget(self.schedule_frame_23)
+        self.schedule_verticalLayout_13.addWidget(self.schedule_frame_19)
+        self.schedule_frame_16 = QtWidgets.QFrame(self.schedule_frame_15)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_frame_16.sizePolicy().hasHeightForWidth())
+        self.schedule_frame_16.setSizePolicy(sizePolicy)
+        self.schedule_frame_16.setMaximumSize(QtCore.QSize(16777215, 90))
+        self.schedule_frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_16.setObjectName("schedule_frame_16")
+        self.schedule_horizontalLayout_17 = QtWidgets.QHBoxLayout(self.schedule_frame_16)
+        self.schedule_horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_17.setSpacing(0)
+        self.schedule_horizontalLayout_17.setObjectName("schedule_horizontalLayout_17")
+        self.schedule_frame_17 = QtWidgets.QFrame(self.schedule_frame_16)
+        self.schedule_frame_17.setMinimumSize(QtCore.QSize(0, 50))
+        self.schedule_frame_17.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_17.setObjectName("schedule_frame_17")
+        self.schedule_horizontalLayout_18 = QtWidgets.QHBoxLayout(self.schedule_frame_17)
+        self.schedule_horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_18.setSpacing(0)
+        self.schedule_horizontalLayout_18.setObjectName("schedule_horizontalLayout_18")
+        self.schedule_label_62 = QtWidgets.QLabel(self.schedule_frame_17)
+        self.schedule_label_62.setMinimumSize(QtCore.QSize(120, 0))
+        self.schedule_label_62.setMaximumSize(QtCore.QSize(150, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_label_62.setFont(font)
+        self.schedule_label_62.setStyleSheet("color: rgb(87, 71, 127);")
+        self.schedule_label_62.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_62.setObjectName("schedule_label_62")
+        self.schedule_horizontalLayout_18.addWidget(self.schedule_label_62)
+        self.schedule_lineEdit_36 = QtWidgets.QLineEdit(self.schedule_frame_17)
+        self.schedule_lineEdit_36.setMinimumSize(QtCore.QSize(120, 30))
+        self.schedule_lineEdit_36.setMaximumSize(QtCore.QSize(376, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.schedule_lineEdit_36.setFont(font)
+        self.schedule_lineEdit_36.setStyleSheet("border:1px solid rgb(86, 123, 142);")
+        self.schedule_lineEdit_36.setInputMethodHints(QtCore.Qt.ImhPreferUppercase)
+        self.schedule_lineEdit_36.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_lineEdit_36.setObjectName("schedule_lineEdit_36")
+        self.schedule_horizontalLayout_18.addWidget(self.schedule_lineEdit_36)
+        self.schedule_horizontalLayout_17.addWidget(self.schedule_frame_17)
+        self.schedule_frame_18 = QtWidgets.QFrame(self.schedule_frame_16)
+        self.schedule_frame_18.setMinimumSize(QtCore.QSize(0, 50))
+        self.schedule_frame_18.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_18.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_18.setObjectName("schedule_frame_18")
+        self.schedule_horizontalLayout_6 = QtWidgets.QHBoxLayout(self.schedule_frame_18)
+        self.schedule_horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_6.setSpacing(0)
+        self.schedule_horizontalLayout_6.setObjectName("schedule_horizontalLayout_6")
+        self.schedule_label_63 = QtWidgets.QLabel(self.schedule_frame_18)
+        self.schedule_label_63.setMinimumSize(QtCore.QSize(60, 0))
+        self.schedule_label_63.setMaximumSize(QtCore.QSize(108, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_label_63.setFont(font)
+        self.schedule_label_63.setStyleSheet("color: rgb(87, 71, 127);")
+        self.schedule_label_63.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_63.setObjectName("schedule_label_63")
+        self.schedule_horizontalLayout_6.addWidget(self.schedule_label_63)
+        self.schedule_lineEdit_42 = QtWidgets.QLineEdit(self.schedule_frame_18)
+        self.schedule_lineEdit_42.setMinimumSize(QtCore.QSize(120, 30))
+        self.schedule_lineEdit_42.setMaximumSize(QtCore.QSize(376, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.schedule_lineEdit_42.setFont(font)
+        self.schedule_lineEdit_42.setStyleSheet("border:1px solid rgb(86, 123, 142);")
+        self.schedule_lineEdit_42.setText("")
+        self.schedule_lineEdit_42.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_lineEdit_42.setObjectName("schedule_lineEdit_42")
+        self.schedule_horizontalLayout_6.addWidget(self.schedule_lineEdit_42)
+        self.schedule_horizontalLayout_17.addWidget(self.schedule_frame_18)
+        self.schedule_verticalLayout_13.addWidget(self.schedule_frame_16)
+        self.schedule_frame_20 = QtWidgets.QFrame(self.schedule_frame_15)
+        self.schedule_frame_20.setMaximumSize(QtCore.QSize(16777215, 90))
+        self.schedule_frame_20.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_20.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_20.setObjectName("schedule_frame_20")
+        self.schedule_horizontalLayout_23 = QtWidgets.QHBoxLayout(self.schedule_frame_20)
+        self.schedule_horizontalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_23.setSpacing(0)
+        self.schedule_horizontalLayout_23.setObjectName("schedule_horizontalLayout_23")
+        self.schedule_frame_22 = QtWidgets.QFrame(self.schedule_frame_20)
+        self.schedule_frame_22.setMinimumSize(QtCore.QSize(0, 50))
+        self.schedule_frame_22.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius:9px;")
+        self.schedule_frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_22.setObjectName("schedule_frame_22")
+        self.schedule_horizontalLayout_26 = QtWidgets.QHBoxLayout(self.schedule_frame_22)
+        self.schedule_horizontalLayout_26.setContentsMargins(0, 0, 0, 0)
+        self.schedule_horizontalLayout_26.setSpacing(0)
+        self.schedule_horizontalLayout_26.setObjectName("schedule_horizontalLayout_26")
+        self.schedule_label_66 = QtWidgets.QLabel(self.schedule_frame_22)
+        self.schedule_label_66.setMinimumSize(QtCore.QSize(150, 0))
+        self.schedule_label_66.setMaximumSize(QtCore.QSize(200, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_label_66.setFont(font)
+        self.schedule_label_66.setStyleSheet("color: rgb(87, 71, 127);")
+        self.schedule_label_66.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_label_66.setObjectName("schedule_label_66")
+        self.schedule_horizontalLayout_26.addWidget(self.schedule_label_66)
+        self.schedule_lineEdit_40 = QtWidgets.QLineEdit(self.schedule_frame_22)
+        self.schedule_lineEdit_40.setMinimumSize(QtCore.QSize(150, 30))
+        self.schedule_lineEdit_40.setMaximumSize(QtCore.QSize(376, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.schedule_lineEdit_40.setFont(font)
+        self.schedule_lineEdit_40.setStyleSheet("border:1px solid rgb(86, 123, 142);")
+        self.schedule_lineEdit_40.setAlignment(QtCore.Qt.AlignCenter)
+        self.schedule_lineEdit_40.setValidator(QIntValidator())
+        self.schedule_lineEdit_40.setMaximumWidth(200)
+        self.schedule_lineEdit_40.setObjectName("schedule_lineEdit_40")
+        self.schedule_horizontalLayout_26.addWidget(self.schedule_lineEdit_40)
+        self.schedule_horizontalLayout_23.addWidget(self.schedule_frame_22)
+        self.schedule_verticalLayout_13.addWidget(self.schedule_frame_20)
+        self.schedule_frame_69 = QtWidgets.QFrame(self.schedule_frame_15)
+        self.schedule_frame_69.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.schedule_frame_69.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_69.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.schedule_frame_69.setObjectName("schedule_frame_69")
+        self.schedule_verticalLayout_14 = QtWidgets.QVBoxLayout(self.schedule_frame_69)
+        self.schedule_verticalLayout_14.setObjectName("schedule_verticalLayout_14")
+        self.schedule_pushButton_8 = QtWidgets.QPushButton(self.schedule_frame_69)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_pushButton_8.sizePolicy().hasHeightForWidth())
+        self.schedule_pushButton_8.setSizePolicy(sizePolicy)
+        self.schedule_pushButton_8.setMinimumSize(QtCore.QSize(150, 40))
+        self.schedule_pushButton_8.setMaximumSize(QtCore.QSize(200, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.schedule_pushButton_8.setFont(font)
+        self.schedule_pushButton_8.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.schedule_pushButton_8.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.511, y1:0, x2:0.5, y2:1, stop:0 rgba(101, 172, 236, 255), stop:1 rgba(109, 55, 196, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius:6px;")
+        self.schedule_pushButton_8.setAutoDefault(False)
+        self.schedule_pushButton_8.setDefault(False)
+        self.schedule_pushButton_8.setFlat(False)
+        self.schedule_pushButton_8.setObjectName("schedule_pushButton_8")
+        self.schedule_verticalLayout_14.addWidget(self.schedule_pushButton_8, 0, QtCore.Qt.AlignHCenter)
+        self.schedule_verticalLayout_13.addWidget(self.schedule_frame_69)
+        # self.schedule_verticalLayout_13.setStretch(0, 1)
+        # self.schedule_verticalLayout_13.setStretch(1, 1)
+        # self.schedule_verticalLayout_13.setStretch(2, 1)
+        self.schedule_horizontalLayout_41.addWidget(self.schedule_frame_15)
+        self.schedule_frame_36 = QtWidgets.QFrame(self.schedule_frame_56)
+        self.schedule_frame_36.setMinimumSize(QtCore.QSize(600, 0))
+        self.schedule_frame_36.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.schedule_frame_36.setFrameShadow(QtWidgets.QFrame.Raised)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.schedule_frame_36.sizePolicy().hasHeightForWidth())
+
+        self.schedule_frame_36.setSizePolicy(sizePolicy)
+        self.schedule_frame_36.setObjectName("schedule_frame_36")
+        self.schedule_gridLayout_4 = QtWidgets.QGridLayout(self.schedule_frame_36)
+        self.schedule_gridLayout_4.setObjectName("schedule_gridLayout_4")
+
+        self.schedule_tableWidget = QtWidgets.QTableWidget(self.schedule_frame_36)
+        self.schedule_tableWidget.setObjectName("schedule_tableWidget")
+        # self.schedule_tableWidget.setColumnCount(0)
+        # self.schedule_tableWidget.setRowCount(0)
+        self.schedule_tableWidget.setStyleSheet("QHeaderView::section {\n"
+"    background-color: rgb(108, 61, 182);\n"
+"    height:25px;\n"
+"    color: rgb(255, 255, 255);\n"
+"border:none;\n"
+"border-radius:5px;\n"
+"padding: 4px;\n"
+"    font-size: 12pt;\n"
+"    border-style: none;\n"
+"    border-bottom: 1px solid rgb(255, 255, 255);\n"
+"    border-right: 1px solid rgb(238, 235, 241);\n"
+"}\n"
+"QTableWidget::item {\n"
+"border: 4px;\n"
+"padding: 5px;\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QScrollBar\n"
+"{\n"
+"background :rgb(255, 255, 255);\n"
+"width: 10px;\n"
+"border:none;\n"
+"}\n"
+"QScrollBar::handle\n"
+"{\n"
+"background : rgb(108, 61, 183);\n"
+"}\n"
+"QScrollBar::handle::pressed\n"
+"{\n"
+"background : rgb(100, 56, 170);\n"
+"}")
+        self.schedule_tableWidget.setColumnCount(8)
+        self.schedule_tableWidget.setRowCount(21)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(10, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(11, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(12, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(13, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(14, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(15, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(16, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(17, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(18, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(19, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setVerticalHeaderItem(20, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.schedule_tableWidget.setItem(0, 4, item)
+        self.schedule_tableWidget.resizeColumnsToContents()
+        self.schedule_tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.schedule_tableWidget.verticalHeader().setVisible(False)
+
+
+
+
+        self.schedule_gridLayout_4.addWidget(self.schedule_tableWidget, 0, 0, 1, 1)
+        self.schedule_horizontalLayout_41.addWidget(self.schedule_frame_36)
+        self.schedule_verticalLayout_2.addLayout(self.schedule_horizontalLayout_41)
+        self.schedule_verticalLayout_15.addWidget(self.schedule_frame_56)
+        self.stackedWidget.addWidget(self.schedule_page)
         self.page_15 = QtWidgets.QWidget()
         self.page_15.setObjectName("page_15")
         self.verticalLayout_29 = QtWidgets.QVBoxLayout(self.page_15)
@@ -2013,12 +2574,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_53.setText(_translate("MainWindow", "360-CRM"))
+        self.label_53.setText(_translate("MainWindow", "  360-CRM "))
         self.label_54.setText(_translate("MainWindow", "Welcome Back"))
         self.pushButton_24.setText(_translate("MainWindow", "  Customer"))
         self.pushButton_25.setText(_translate("MainWindow", "  Inventory"))
         self.pushButton_26.setText(_translate("MainWindow", "  Orders"))
         self.pushButton_27.setText(_translate("MainWindow", "  Settings"))
+        self.pushButton_schedule.setText(_translate("MainWindow", "  Schedule"))
+        
+
         self.label_50.setText(_translate("MainWindow", "Login"))
         self.label_55.setText(_translate("MainWindow", "Username         "))
         self.label_56.setText(_translate("MainWindow", "Password        "))
@@ -2039,6 +2603,77 @@ class Ui_MainWindow(object):
         self.label_66.setText(_translate("MainWindow", "Price $"))
         self.label_67.setText(_translate("MainWindow", "Discount %"))
         self.pushButton_8.setText(_translate("MainWindow", "Add Order"))
+
+        self.schedule_label_52.setText(_translate("MainWindow", "Meeting Schedule"))
+
+        self.schedule_label_62.setText(_translate("MainWindow", "Customer"))
+        self.schedule_label_63.setText(_translate("MainWindow", "Title"))
+        self.schedule_label_64.setText(_translate("MainWindow", "Date"))
+        self.schedule_label_65.setText(_translate("MainWindow", "Time"))
+        self.schedule_label_66.setText(_translate("MainWindow", "Duration(min)"))
+        # self.schedule_label_67.setText(_translate("MainWindow", "Discount %"))
+        
+        item = self.schedule_tableWidget.verticalHeaderItem(0)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(1)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(2)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(3)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(4)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(5)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(6)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(7)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(8)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(9)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(10)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(11)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(12)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(13)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(14)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(15)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(16)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(17)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(18)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(19)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.verticalHeaderItem(20)
+        item.setText(_translate("MainWindow", "New Row"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "S.No"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Customer"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Title"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Date"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Time"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Duration"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Edit"))
+        item = self.schedule_tableWidget.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "Cancel"))
+
+        self.schedule_pushButton_8.setText(_translate("MainWindow", "New Schedule"))
+
         self.label_68.setText(_translate("MainWindow", "Add Inventory"))
         self.label_79.setText(_translate("MainWindow", "Name"))
         self.label_84.setText(_translate("MainWindow", "Quantity"))
@@ -2239,10 +2874,12 @@ class MainWindow(QMainWindow):
 
     send_invoice_signal = pyqtSignal(int)
     send_invoice_order_signal = pyqtSignal(int)
-
+    send_schedule_signal = pyqtSignal(int, str)
+    
     populate_customer_signal = pyqtSignal(bool)
     populate_order_signal = pyqtSignal(bool)
     populate_inventory_signal = pyqtSignal(bool)
+    populate_schedule_signal = pyqtSignal(bool)
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -2263,14 +2900,24 @@ class MainWindow(QMainWindow):
         self.ui.label_3.setMovie(self.movie2)
         self.ui.label_3.hide()
 
+        self.schedule_movie2 = QtGui.QMovie("animation_200_lcuxl90f.gif")
+        self.ui.schedule_label_3.setMovie(self.schedule_movie2)
+        self.ui.schedule_label_3.hide()
+
         self.movie3 = QtGui.QMovie("animation_200_lcuxl90f.gif")
         self.ui.label_4.setMovie(self.movie3)
         self.ui.label_4.hide()
+
         self.ui.lineEdit_42.setText(str(datetime.date.today()))
         self.ui.lineEdit_39.setText("1")
 
+        today = QtCore.QDate.currentDate()
+        self.ui.schedule_calendarWidget_2.setSelectedDate(today)
+        self.ui.schedule_calendarWidget_2.showSelectedDate()
 
-
+        # self.ui.schedule_calendarWidget_2.clearFocus()
+        self.ui.schedule_calendarWidget_2.setDateTextFormat(today, self.ui.date_painter)
+        self.ui.schedule_dateEdit.setDate(today)
 
 
     def button_connection(self):
@@ -2279,7 +2926,9 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_24.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_16))
         self.ui.pushButton_25.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_17))
         self.ui.pushButton_26.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_22))
+        self.ui.pushButton_schedule.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.schedule_page))
         self.ui.pushButton_17.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
+        self.ui.schedule_pushButton_8.clicked.connect(self.add_schedule)
         self.ui.pushButton_10.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_14))
         self.ui.pushButton_12.clicked.connect(lambda: self.logout())
         self.ui.pushButton_4.clicked.connect(lambda:self.add_customer_signal.emit())
@@ -2294,13 +2943,17 @@ class MainWindow(QMainWindow):
 
         self.ui.lineEdit_54.textChanged.connect(partial(self.search, "order", self.ui.lineEdit_54, None))
         self.ui.pushButton_13.clicked.connect(lambda: self.search("order", self.ui.lineEdit_54, True))
+        self.ui.schedule_calendarWidget_2.clicked[QDate].connect(self.update_selected_date)
 
         self.populate_customer_signal.connect(self.add_data_to_customer)
         self.populate_order_signal.connect(self.add_data_to_order)
         self.populate_inventory_signal.connect(self.add_data_to_inventory)
+        self.populate_schedule_signal.connect(self.add_data_to_schedule)
 
         self.send_invoice_signal.connect(self.send_invoice)
         self.send_invoice_order_signal.connect(self.send_invoice_order)
+        self.send_schedule_signal.connect(self.send_meeting_schedule)
+
 
     def logout(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_12)
@@ -2313,9 +2966,17 @@ class MainWindow(QMainWindow):
         s.start()
 
     def send_invoice_order(self, id):
-            s = threading.Thread(target=invoice.generate2, args=(id,))
-            s.start()
+        s = threading.Thread(target=invoice.generate2, args=(id,))
+        s.start()
         # s.join()
+
+    def send_meeting_schedule(self,id, content="add"):
+        s=threading.Thread(target=schedule.set_meeting, args=(id,content,))
+        s.start()
+
+    # def send_invoice_order(self, id):
+    #     s = threading.Thread(target=invoice.generate2, args=(id,))
+    #     s.start()
 
     def search(self,page,field,button=None):
 
@@ -2331,7 +2992,16 @@ class MainWindow(QMainWindow):
             if page == "order":
                 self.populate_order_signal.emit(True)
 
+    def update_selected_date(self, clicked_date=None):
+        # print("Selected Date: ", self.ui.schedule_calendarWidget_2.selectedDate())
 
+        self.ui.schedule_calendarWidget_2.setDateTextFormat(QDate(), self.ui.date_painter)
+        if clicked_date is not None:
+            self.ui.schedule_calendarWidget_2.setDateTextFormat(clicked_date, self.ui.date_painter)
+            # self.ui.schedule_calendarWidget_2.setba(clicked_date, self.ui.date_painter)
+            # self.date_brush
+
+            self.ui.schedule_dateEdit.setDate(self.ui.schedule_calendarWidget_2.selectedDate())
 
     def add_drop_shadow(self):
         frames=[self.ui.frame_180,self.ui.widget_15,self.ui.frame_72,self.ui.pushButton_12,
@@ -2343,7 +3013,7 @@ class MainWindow(QMainWindow):
         frames2=[self.ui.frame_5,self.ui.frame_6,
                 self.ui.frame_5,self.ui.frame_9,self.ui.frame_8,self.ui.frame_7,self.ui.frame_10,
                 self.ui.frame_17,self.ui.frame_18,self.ui.frame_21,self.ui.frame_23,self.ui.frame_22,self.ui.frame_24,
-                self.ui.frame_39,self.ui.frame_40,self.ui.frame_41,self.ui.tableWidget_8,self.ui.tableWidget_7,self.ui.tableWidget_5]
+                self.ui.frame_39,self.ui.frame_40,self.ui.frame_41,self.ui.tableWidget_8, self.ui.tableWidget_7,self.ui.tableWidget_5, self.ui.schedule_tableWidget]  # self.ui.schedule_tableWidget
         for frame in frames:
                 shadow = QGraphicsDropShadowEffect()
                 shadow.setBlurRadius(50)
@@ -2393,11 +3063,20 @@ class MainWindow(QMainWindow):
 
         self.ui.tableWidget_8.resize(self.ui.frame_68.size().width() - 80, self.ui.frame_68.size().height() - 300)
         self.ui.tableWidget_8.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # print(self.ui.schedule_tableWidget.size())
+        # self.ui.schedule_tableWidget.resize(int(self.ui.schedule_frame_56.size().width()/2) - 10, self.ui.schedule_frame_56.size().height() - 30)
+        self.ui.schedule_tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        # self.ui.schedule_tableWidget.resize(500, 400)
+        # print(self.ui.schedule_tableWidget.size())
+        # # print((int(self.ui.meeting_frame.size().width() / 2), self.ui.meeting_frame.size().height() - 300))
+        # self.ui.schedule_tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
     def initialize_data(self):
 
         self.add_data_to_customer()
         self.add_data_to_order()
         self.add_data_to_inventory()
+        self.add_data_to_schedule()
 
     def stop_noti(self,label,movie):
         label.hide()
@@ -2420,6 +3099,11 @@ class MainWindow(QMainWindow):
                 self.populate_inventory_signal.emit(True)
             # s = threading.Thread(target=self.add_data_to_customer)
             # s.start()
+        #     if self.ui.lineEdit_56.text() == "":
+        #         self.populate_schedule_signal.emit(False)
+        #     else:
+
+            self.populate_schedule_signal.emit(True)
 
         except:
             pass
@@ -2495,6 +3179,47 @@ class MainWindow(QMainWindow):
             if operation == "invoice":
                 self.send_invoice_order_signal.emit(id)
 
+        if table_name == "schedule":
+            if operation == "update":
+                # date = self.ui.tableWidget_7.item(row, 2).text()
+                # item = self.ui.tableWidget_7.item(row, 3).text()
+                # quantity = self.ui.tableWidget_7.item(row, 4).text()
+                # price = self.ui.tableWidget_7.item(row, 5).text()
+                # discount = self.ui.tableWidget_7.item(row, 6).text()
+                print(row)
+
+                customer_name = self.ui.schedule_tableWidget.item(row, 1).text()
+                print(customer_name)
+                date = self.ui.schedule_tableWidget.cellWidget(row, 3).date().toString("yyyy-MM-dd")
+                print(date)
+                time = self.ui.schedule_tableWidget.cellWidget(row, 4).time().toString("hh:mm")
+                title = self.ui.schedule_tableWidget.item(row, 2).text()
+
+                duration = self.ui.schedule_tableWidget.item(row, 5).text()
+
+                data = [title, date, time, duration]
+
+                print(data)
+                db.update_schedule(id,data)
+                # if self.ui.lineEdit_54.text()=="":
+                #     self.populate_order_signal.emit(False)
+                # else:
+                self.send_schedule_signal.emit(id, "update")
+                
+                self.populate_schedule_signal.emit(True)
+            if operation == "cancel":
+                s=threading.Thread(target=schedule.set_meeting, args=(id,"cancel",))
+                s.start()
+                s.join()
+
+                while True:
+                    if s.is_alive():
+                        time.sleep(1)
+                        continue
+                    break
+
+                db.delete_schedule(id)
+                self.populate_schedule_signal.emit(True)
 
 
     def add_data_to_customer(self,status=False):
@@ -2551,6 +3276,10 @@ class MainWindow(QMainWindow):
         completer = QCompleter(customers)
         completer.setCaseSensitivity(Qt.CaseInsensitive)
         self.ui.lineEdit_36.setCompleter(completer)
+
+        completer = QCompleter(customers)
+        completer.setCaseSensitivity(Qt.CaseInsensitive)
+        self.ui.schedule_lineEdit_36.setCompleter(completer)
 
         completer2 = QCompleter(customer_search)
         completer2.setCaseSensitivity(Qt.CaseInsensitive)
@@ -2713,13 +3442,125 @@ class MainWindow(QMainWindow):
         self.timer.start()
 
 
+    def add_data_to_schedule(self,status=False):
+        all_data = db.get_schedule_data()
+        print(f"{all_data=}")
+        self.ui.schedule_tableWidget.setRowCount(0)
+        self.ui.schedule_tableWidget.verticalHeader().setVisible(False)
+        # Get the current number of rows in the table
+        for data in all_data:
+            row = self.ui.schedule_tableWidget.rowCount()
+
+             # Add a new row to the table
+            self.ui.schedule_tableWidget.insertRow(row)
+
+            # Add the data to the new row
+            for i, item in enumerate(data):
+                if i == 3:
+                    # item = [int(d) for d in item.split("-")]
+                    date_ = QDate.fromString(item, "yyyy-MM-dd")
+                    item = QtWidgets.QDateEdit()
+                    item.setDate(date_)
+                    item.setDisplayFormat("yy-MM-dd")
+                    # item.setMinimumSize(QtCore.QSize(100, 20))
+                    item.setFrame(False)
+                    # self.schedule_dateEdit.setLayoutDirection(QtCore.Qt.LeftToRight)
+                    # self.schedule_dateEdit.setStyleSheet("color: rgb(87, 71, 127);\n"
+                    # "font: 75 12pt \"MS Shell Dlg 2\";\n"
+                    # "")
+                    self.ui.schedule_tableWidget.setCellWidget(row, i, item)
+                elif i == 4:
+                    # item = [int(d) for d in item.split(":")]
+                    time_ = QTime.fromString(item, "hh:mm")
+                    item = QtWidgets.QTimeEdit()
+                    item.setTime(time_)
+                    item.setFrame(False)
+                    item.setDisplayFormat("hh:mm")
+                    self.ui.schedule_tableWidget.setCellWidget(row, i, item)
+                else:
+                    try:
+                        item=item.capitalize()
+                    except:
+                        pass
+
+                    item = QtWidgets.QTableWidgetItem(str(item))
+                    if i == 1:
+                        item.setFlags(item.flags()  ^ QtCore.Qt.ItemIsEditable)                                                    
+                    self.ui.schedule_tableWidget.setItem(row, i, item)
+
+            # self.ui.tableWidget_5.setGeometry(self.ui.frame_55.geometry())
+            btn = QPushButton(self.ui.schedule_tableWidget)
+            btn.setText('Update')
+            btn.setFlat(True)
+            btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            btn.clicked.connect(partial(self.crud, "schedule", data[0], row, "update"))
+            self.ui.schedule_tableWidget.setCellWidget(row, 6, btn)
+
+            btn2 = QPushButton(self.ui.schedule_tableWidget)
+            btn2.setText('Cancel')
+            btn2.setFlat(True)
+
+            btn2.setStyleSheet("color:red;")
+            btn2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            btn2.clicked.connect(partial(self.crud, "schedule", data[0], row, "cancel"))
+            self.ui.schedule_tableWidget.setCellWidget(row, 7, btn2)
 
 
+    def add_schedule(self):
+        try:
+            customer_name = int(self.ui.schedule_lineEdit_36.text().split("(")[1].replace(")","")) #   int(self.ui.schedule_lineEdit_36.text().split("(")[1].replace(")",""))
+        except Exception as e:
+            error_retval = QMessageBox.warning(
+                None,
+                "Warning",
+                "Invalid Customer Name...",
+                QMessageBox.Ok
+            )
+            return
+        date = self.ui.schedule_dateEdit.date().toString("yyyy-MM-dd")
+        title = self.ui.schedule_lineEdit_42.text()
+        if title.strip() == "":
+            error_retval = QMessageBox.warning(
+                None,
+                "Warning",
+                "Title is empty. Please input the title.",
+                QMessageBox.Ok
+            )
+            return
+        time = self.ui.schedule_timeEdit.time().toString("hh:mm")
+        duration = self.ui.schedule_lineEdit_40.text()
+        if duration.strip() == "":
+            error_retval = QMessageBox.warning(
+                None,
+                "Warning",
+                "Meeting Period is not set. Please input the duration.",
+                QMessageBox.Ok
+            )
+            return
 
 
+        # x = db.insert_schedule(customer_name, title, date, time, duration)
+        s=threading.Thread(target=db.insert_schedule,args=(customer_name, title, date, time, duration,))
+        s.start()
+        s.join()
+        # Show message box with "Success" message
+        self.ui.schedule_label_3.show()
+        self.schedule_movie2.start()
+        self.timer = QtCore.QTimer(self)
+        self.timer.setInterval(2200)
+        self.timer.setSingleShot(True)
+        self.timer.timeout.connect(lambda:self.stop_noti(self.ui.schedule_label_3,self.schedule_movie2))
+        self.timer.start()
+
+        while True:
+            if s.is_alive():
+                time.sleep(1)
+                continue
+            self.send_schedule_signal.emit(-1, "add")
+            break
 
 
-
+        # if label.objectName() == "schedule_label_3":
 
 
 from sys import exit as sysExit
